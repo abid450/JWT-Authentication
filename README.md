@@ -11,6 +11,7 @@ A complete, secure & modern authentication system built using **Django**, **DRF*
 
 ---
 
+
  📧 **2. Email Verification System**
 ✔ User registers → system sends email  
 ✔ Email contains verification link  
@@ -41,13 +42,15 @@ Every token action is logged:
 	🟡 REFRESH  
 	🔴 LOGOUT  
 
+
 Logged details:
 	🌐 IP Address  
 	💻 Device / User Agent  
 	🆔 Token JTI  
 	🕒 Timestamp  
 -  🌐 IP Address Tracking (Advanced Security)
--  
+
+   
 🟦 Features:
 •	Last_ip automatically stored on every login
 •	Login_ip_history table/model tracks all previous login ips
@@ -57,12 +60,14 @@ o	🕒 Login Time
 o	📱 Device/User-Agent
 
 
+
 🚨 suspicious login detection
 System can detect & log:
 •	New unknown ip
 •	Frequent ip changes
 •	Sudden location change
 (useful for notifying admin or sending email alerts)
+
 
 
 💻 Device Tracking System (Highly Secure)
