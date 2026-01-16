@@ -36,13 +36,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         elif User.objects.filter(phone_number=phone).exists():
             raise serializers.ValidationError('Phone Number is already exist.')
         return phone
+    
+    
+    def validate_password(self, password):
+        if not re.match(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$', password):
+            raise serializers.ValidationError("Password does not meet security requirements.")
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-
-
-
 
 
 # Profile ------------------------------------------------------
@@ -109,7 +111,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     
 
 
-
+# Login Device ----------------------------------------------------------------
 class LoginDeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoginDevice
@@ -119,6 +121,9 @@ class LoginDeviceSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id", "ip_address", "user_agent", "last_used", "created_at"]
 
+
+
+#ip history ----------------------------------------------------------------
 class LoginIPHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = LoginIPHistory

@@ -15,11 +15,34 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.static import static
 from account.views import *
+from django.views.generic import TemplateView
+from college.views import *
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register('month_r', AttendanceMonthlyReportView, basename='monthlyreport')
+router.register('students', StudentView, basename='students')
+router.register('marks', MarkViewSet, basename='marks')
+router.register('attendance-create', AttendanceCreateViewSet, basename='attendance-create')
+router.register('attendance', AttendanceViewSet, basename='attendance')
+
+
+urlpatterns = router.urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('adminpanel', TemplateView.as_view(template_name='attendenceSummary.html'), name='summary'),
+    path('attendencepanel', TemplateView.as_view(template_name='attendence.html'), name='attendence'),
+
+
+    path('api/', include(router.urls)),
     path('signup', RegisterAPIView.as_view(), name='signup'),
+    path('login_info', TemplateView.as_view(template_name="login.html")),
+    path('signup_info', TemplateView.as_view(template_name="signup.html")),
     path('login', LoginAPIView.as_view(), name='login'),
     path("devices/", DeviceListAPIView.as_view(), name="device-list"),
     path("devices/<int:device_id>/logout/", DeviceLogoutAPIView.as_view(), name="device-logout"),
@@ -31,4 +54,5 @@ urlpatterns = [
     path("reset-password/", PasswordResetRequestAPIView.as_view(), name="reset-password"),
     path("reset-password-confirm/", PasswordResetConfirmAPIView.as_view(), name="reset-password-confirm"),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

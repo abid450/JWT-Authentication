@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <form class="login-box" onsubmit="event.preventDefault(); loginUser();">
+
+        <h2>Login Account</h2>
+
+        <div class="input-group">
+    
+            <input type="email" placeholder="Email Address"  id="email" required />
+        </div>
+
+        <div class="input-group">
+    
+            <input type="password"  placeholder="Password"   id="password" required />
+        </div>
+
+        <button type="submit" class="btn" style="background-color: blueviolet; border-radius: 7px;">Login</button>
+
+        <p id="msg"></p>
+
+        <p class="bottom-text">
+            Don't have an account?  
+            <a href="register.html">Create one</a>
+        </p>
+    </form>
+
+</div>
+
+<script src="/static/login.js"></script>
+</body>
+</html>
